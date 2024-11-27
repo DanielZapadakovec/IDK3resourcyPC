@@ -89,10 +89,11 @@ public class CardSpawner : MonoBehaviour
 
     private void HandleCardRemoval(CardPrefab cardScript)
     {
-        // Ak karta nie je oznaèená ako reusable, odstráni ju z aktívneho zoznamu
-        if (!cardScript.isReusable)
+        GameObject cardPrefab = cardPrefabs.Find(prefab => prefab.name == currentCard.name.Replace("(Clone)", "").Trim());
+
+        if (!cardScript.isReusable && cardPrefab != null)
         {
-            activeCardList.Remove(currentCard);
+            activeCardList.Remove(cardPrefab);
         }
     }
 
@@ -127,18 +128,7 @@ public class CardSpawner : MonoBehaviour
         currentCard = Instantiate(specialEventPrefab, spawnPoint.position, Quaternion.identity);
         currentCard.transform.SetParent(canvas.transform, false);
         currentCard.GetComponent<RectTransform>().anchoredPosition = spawnPoint.GetComponent<RectTransform>().anchoredPosition;
-
-        var cardScript = currentCard.GetComponent<CardPrefab>();
-        cardScript.lawTitle = title;
-        cardScript.scienceEffectAccept = sciencePenalty;
-        cardScript.economyEffectAccept = economyPenalty;
-        cardScript.popularityEffectAccept = popularityPenalty;
-        cardScript.stabilityEffectAccept = stabilityPenalty;
-
-        cardScript.scienceEffectDecline = 0; // Game Over na odmietnutie
-        cardScript.economyEffectDecline = 0;
-        cardScript.popularityEffectDecline = 0;
-        cardScript.stabilityEffectDecline = 0;
+        resourceManager.GameOver("The flood destroyed your old dams and roads. You were killed in an accident.");
     }
 
     public void AcceptSpecialEvent()

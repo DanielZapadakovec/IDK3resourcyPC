@@ -174,7 +174,7 @@ MonoBehaviour:
   scienceEffectAccept: 0
   economyEffectAccept: 15
   popularityEffectAccept: 5
-  stabilityEffectAccept: -10
+  stabilityEffectAccept: -30
   scienceEffectDecline: 0
   economyEffectDecline: -5
   popularityEffectDecline: -10
@@ -183,7 +183,7 @@ MonoBehaviour:
   isDamCheck: 0
   lawText: {fileID: 3296855807647285838}
   lawPropsText: {fileID: 3286150599583782229}
-  isReusable: 0
+  isReusable: 1
 --- !u!1 &3387121536452871651
 GameObject:
   m_ObjectHideFlags: 0
